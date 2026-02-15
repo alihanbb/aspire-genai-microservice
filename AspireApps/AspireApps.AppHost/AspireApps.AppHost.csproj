@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.5.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>91c96b44-d121-43cd-b3b7-13c7821b184c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AspireApps.BasketService\AspireApps.BasketService.csproj" />
+    <ProjectReference Include="..\AspireApps.ApiService\AspireApps.CatalogService.csproj" />
+    <ProjectReference Include="..\AspireApps.Web\AspireApps.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.ApplicationInsights" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.KeyVault" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.1.0" />
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Ollama" Version="13.1.1" />
+    <PackageReference Include="Keycloak.AuthServices.Aspire.Hosting" Version="0.2.0" />
+  </ItemGroup>
+
+</Project>

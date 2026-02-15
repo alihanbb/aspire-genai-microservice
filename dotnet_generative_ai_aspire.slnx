@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/aspire/">
+    <Project Path="AspireApps/AspireApps.AppHost/AspireApps.AppHost.csproj" />
+    <Project Path="AspireApps/AspireApps.ServiceDefaults/AspireApps.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/frontend/">
+    <Project Path="AspireApps/AspireApps.Web/AspireApps.Web.csproj" />
+  </Folder>
+  <Folder Name="/src/services/">
+    <Project Path="AspireApps.BasketService/AspireApps.BasketService.csproj" />
+    <Project Path="AspireApps/AspireApps.ApiService/AspireApps.CatalogService.csproj" />
+  </Folder>
+</Solution>

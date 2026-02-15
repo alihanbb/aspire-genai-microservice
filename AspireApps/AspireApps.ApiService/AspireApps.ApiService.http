@@ -1,0 +1,79 @@
+@ApiService_HostAddress = http://localhost:5476/products
+@accessToken = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ1YUx5SEVENFpKSkRQNHNfdHVKSGNTMWZ2d1BMWlh3cVk3MzgtMFdFcTgwIn0.eyJleHAiOjE3NzAwNTE3MzMsImlhdCI6MTc3MDA1MTQzMywianRpIjoiYTlhNmM2YjAtYmM2MS00ODY3LWJiNDQtODdmZWRlNTc0YTEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9lc2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmODg2ZGUxYy1jNmZjLTQ1MzAtYWE4Ny0xZjY3ZmU4MjY3ZmQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJiYXNrZXQtYXBpIiwic2lkIjoiOGYwNTlmODgtOWVlZS00YTFkLWFiMGMtYTdmNTc0NTNkNjMyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lc2hvcCJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InRlc3QgdGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3R1c2VyIiwiZ2l2ZW5fbmFtZSI6InRlc3QiLCJmYW1pbHlfbmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20ifQ.hZqDzDaFDeEVvo3gRiD3PWTPO0eQKgeQ5TEHKJfnY5LlZsWCID1MehrgmBrUlyyi43eYkmWlGC4FZGK9b6JIFcUejJNm40i_oIuL6K1dNxLlbVAXJ-I2DIB7JJCX3iyW6SQ5IqDc2gMAJlDf49ERCuTn0Da24fS-kOlm8FsxKc_0N8FNdF4qJ2HA2hgPpSV4x40vOqjB6uSOdLKuqCeG9UTZW4wJBXvnLRclJefy3uzOUVLuQcjh5PikByKmGV2Wu9-kidV4CFpRX8TUCCnr46js_CC4mmjH8M2wgRIvtw3YPAYGUk1_1Sk-HCUviCpvMD5ocrO3uICrqsH8oIVmew
+
+GET {{ApiService_HostAddress}}/1
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+
+###
+
+
+POST {{ApiService_HostAddress}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+{
+    "id": 10,
+    "name": "New Swn FlashLight",
+    "description": "A New swn product for outdoor enthusiants",
+    "price": 59.99,
+    "image.url": "product.10.png"
+}
+###
+
+PUT {{ApiService_HostAddress}}/10
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+{
+    "id": 10,
+    "name": "Updated Swn FlashLight",
+    "description": "A Updated swn product for outdoor enthusiants",
+    "price": 39.99,
+    "image.url": "product.10.png"
+}
+
+###
+
+DELETE {{ApiService_HostAddress}}/10
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+
+PUT {{ApiService_HostAddress}}/1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+{
+    
+    "name": "Solar Powered Flashlight",
+    "description": "A fantastic product for outdoor enthusiants",
+    "price": 5.99,
+    "image.url": "product1.png"
+}
+
+
+###
+
+POST http://localhost:9090/realms/eshop/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=basket-api&scope=email openid&username=testuser&password=1234
+###
+
+
+GET {{ApiService_HostAddress}}/support/give-me-1-outdoor-activity
+Accept: application/json
+
+### Traditional Search
+
+GET {{ApiService_HostAddress}}/search/Hiking
+Accept: application/json
+
+### AI Search
+
+GET {{ApiService_HostAddress}}/aisearch/Something_for_rainy_days
+Accept: application/json
+
+###

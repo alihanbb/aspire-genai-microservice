@@ -1,0 +1,122 @@
+﻿@page "/search"
+
+@attribute [StreamRendering(true)]
+@rendermode InteractiveServer
+
+@inject CatalogApiClient CatalogApiClient
+
+<PageTitle>Search Products</PageTitle>
+
+<h1>Search Products</h1>
+
+<p>Search our amazing outdoor products that you can purchase.</p>
+
+<div class="form-group">
+    <label for="search" class="form-label">Type your question:</label>
+    <div class="input-group mb-3">
+        <input type="text" id="search" class="form-control" @bind="searchTerm" @bind:event="oninput" placeholder="Enter search term..." @onkeydown="HandleKeyDown" />
+        <button id="btnSearch" class="btn btn-primary" @onclick="DoSearch" disabled="@isSearching">
+            @if (isSearching)
+            {
+                <span class="spinner-border spinner-border-sm" role="status"></span>
+                <span> Searching...</span>
+            }
+            else
+            {
+                <span>Search</span>
+            }
+        </button>
+    </div>
+    <div class="form-check form-switch mb-3">
+        <input type="checkbox" class="form-check-input" id="aiSearchCheckBox" @bind="aiSearch" />
+        <label class="form-check-label" for="aiSearchCheckBox">Use Semantic Search</label>
+    </div>
+    <hr />
+</div>
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> @errorMessage
+    </div>
+}
+else if (isSearching)
+{
+    <p><em>Searching...</em></p>
+}
+else if (products == null)
+{
+    <p><em>Enter a search term and click Search.</em></p>
+}
+else if (products.Count == 0)
+{
+    <p><em>No product found.</em></p>
+}
+else
+{
+    <p class="text-muted">Found @products.Count product(s)</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <!-- Simulating images being hosted on a CDN -->
+                    <td><img height="80" width="80" src="https://raw.githubusercontent.com/MicrosoftDocs/mslearn-dotnet-cloudnative/main/dotnet-docker/Products/wwwroot/images/@product.ImageUrl" /></td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price.ToString("C2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    private string searchTerm = string.Empty;
+    private bool aiSearch = false;
+    private List<Product>? products = null;
+    private bool isSearching = false;
+    private string? errorMessage = null;
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await DoSearch();
+        }
+    }
+
+    private async Task DoSearch()
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            return;
+
+        isSearching = true;
+        errorMessage = null;
+        products = null;
+        StateHasChanged();
+
+        try
+        {
+            products = await CatalogApiClient.SearchProducts(searchTerm, aiSearch);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Search failed: {ex.Message}";
+            products = null;
+        }
+        finally
+        {
+            isSearching = false;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\AspireApps\AspireApps.ApiService\Entity\Product.cs" Link="Entities\Product.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="13.1.0" />
+    <PackageReference Include="Keycloak.AuthServices.Authentication" Version="2.7.0" />
+    <PackageReference Include="Keycloak.AuthServices.Authorization" Version="2.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspireApps\AspireApps.ServiceDefaults\AspireApps.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>

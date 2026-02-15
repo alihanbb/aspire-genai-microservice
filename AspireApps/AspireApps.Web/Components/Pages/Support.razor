@@ -1,0 +1,91 @@
+﻿@page "/support"
+
+@attribute [StreamRendering(true)]
+@rendermode InteractiveServer
+
+@inject CatalogApiClient CatalogApiClient
+
+<PageTitle>Support</PageTitle>
+
+<h1>Support</h1>
+
+<p>Ask questions about our amazing outdoor products that you can purchase.</p>
+
+<div class="form-group">
+    <label for="query" class="form-label">Type your question:</label>
+    <div class="input-group mb-3">
+        <input type="text" id="query" class="form-control" @bind="queryTerm" @bind:event="oninput" placeholder="Enter your query..." @onkeydown="HandleKeyDown" />
+        <button id="btnSend" class="btn btn-primary" @onclick="DoSend" disabled="@isSending">
+            @if (isSending)
+            {
+                <span class="spinner-border spinner-border-sm" role="status"></span>
+                <span> Sending...</span>
+            }
+            else
+            {
+                <span>Send</span>
+            }
+        </button>
+    </div>
+    <hr />
+</div>
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> @errorMessage
+    </div>
+}
+else if (isSending)
+{
+    <p><em>Thinking...</em></p>
+}
+else if (response != null)
+{
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text" style="white-space: pre-wrap;">@response</p>
+        </div>
+    </div>
+}
+
+@code {
+
+    private string queryTerm = string.Empty;
+    private string? response = null;
+    private bool isSending = false;
+    private string? errorMessage = null;
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await DoSend();
+        }
+    }
+
+    private async Task DoSend()
+    {
+        if (string.IsNullOrWhiteSpace(queryTerm))
+            return;
+
+        isSending = true;
+        errorMessage = null;
+        response = null;
+        StateHasChanged();
+
+        try
+        {
+            response = await CatalogApiClient.SupportProducts(queryTerm);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to get response: {ex.Message}";
+            response = null;
+        }
+        finally
+        {
+            isSending = false;
+        }
+    }
+}

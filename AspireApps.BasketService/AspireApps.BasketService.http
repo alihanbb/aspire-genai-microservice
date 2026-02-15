@@ -1,0 +1,44 @@
+@AspireApps.BasketService_HostAddress = http://localhost:5198/basket
+@accessToken = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ1YUx5SEVENFpKSkRQNHNfdHVKSGNTMWZ2d1BMWlh3cVk3MzgtMFdFcTgwIn0.eyJleHAiOjE3NzAwNTAyMDUsImlhdCI6MTc3MDA0OTkwNSwianRpIjoiYTM4MDM3MWEtM2Q1Ny00ZTUxLWE5N2YtOTMwNzI0M2U2ZjkxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1NTYxOC9yZWFsbXMvZXNob3AiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZjg4NmRlMWMtYzZmYy00NTMwLWFhODctMWY2N2ZlODI2N2ZkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYmFza2V0LWFwaSIsInNpZCI6IjdjZGJiYWUzLTQ4NmUtNDQ5NS05YWZlLTMyNDAwZjFjZDRkYyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtZXNob3AiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJ0ZXN0IHRlc3QiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0dXNlciIsImdpdmVuX25hbWUiOiJ0ZXN0IiwiZmFtaWx5X25hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIn0.aFDpst2UNPqTOiWsrZndp2PNGNTdZEZezzXDkTLn_J7SUNP_KYpHp_2Oxl7ZY2TFZhinLOFLsw16el7wgZYv3Mg4vP-94EUs990Psg2AYC5-6fZwJ9q5NNWhhNWa58lvZY7b6Fz3MaepT-HxFYDYof8vhREoaY5aCTSNrXYh91WXR6QhuwdDYKQmeRsW86i_84i4ZOB3sSrcGk1C2ihtkrNRfzNPg2UPSLirmxN6idHcv4byljmm9GrtkgTSihJw7gWIsKoQZH7M8CSWQDFe4OrgPhNMH42RQ871MxIn_p-6anYqyaQD6hXxk4itS-SQwRlQw0BEhXEjS-YLeBaVtA
+GET {{AspireApps.BasketService_HostAddress}}/swn
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+
+POST {{AspireApps.BasketService_HostAddress}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+{
+    "UserName" : "swn",
+    "Items": [
+        {
+            "Quantity": 2,
+            "Color": "Red",
+            "Price": 500,
+            "ProductId": 1,
+            "ProductName": "Solar Powered Flashlight"
+        },
+        {
+            "Quantity": 1,
+            "Color": "Blue",
+            "Price": 500,
+            "ProductId": 2,
+            "ProductName": "Hiking Roles"
+        }
+    ]
+}
+
+###
+
+DELETE {{AspireApps.BasketService_HostAddress}}/swn
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+###
+
+POST http://localhost:55618/realms/eshop/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=basket-api&scope=openid email profile&username=testuser&password=testpassword
+
+###
